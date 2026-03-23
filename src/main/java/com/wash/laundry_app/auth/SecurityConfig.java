@@ -70,7 +70,6 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST,"/auth/login").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/auth/logout").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/auth/refresh").permitAll()
-                                .requestMatchers(HttpMethod.POST,"/auth/setup-admin").permitAll()
                                 .requestMatchers("/uploads/**").permitAll()
                                 .requestMatchers("/actuator/**").permitAll()
 

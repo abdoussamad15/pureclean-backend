@@ -66,34 +66,6 @@ public class AuthController {
         return ResponseEntity.ok(new JwtResponse(accessTocken.toString()));
     }
 
-    @PostMapping("/setup-admin")
-    public ResponseEntity<?> setupAdmin() {
-        if (userRepository.existsByRole(Role.admin)) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(Map.of(
-                            "message", "Admin already exists. This endpoint is disabled.",
-                            "status", "BLOCKED"
-                    ));
-        }
-
-        User admin = new User();
-        admin.setName("jalal sadiki");
-        admin.setEmail("jalal@gmail.com");
-        admin.setPassword(passwordEncoder.encode("jalal123"));
-        admin.setRole(Role.admin);
-        admin.setIsActive(true);
-
-        userRepository.save(admin);
-
-        return ResponseEntity.ok(Map.of(
-                "message", "Admin created successfully!",
-                "email", "jalal@gmail.com",
-                "password", "jalal123",
-                "warning", "DELETE this endpoint now!"
-        ));
-    }
-
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refresh(@CookieValue(name = "refreshToken") String refreshToken) {
         var jwt = jwtService.parseToken(refreshToken);
